@@ -1,91 +1,137 @@
-# Energy Investment Analysis Platform
+
+# Energy Investment Optimization Model
 
 ## Overview
-This project analyzes different energy system scenarios using DC Optimal Power Flow (DCOPF) to evaluate various combinations of generation sources including nuclear, solar, wind, and storage systems. The analysis considers technical feasibility, economic efficiency, and system reliability across different seasonal patterns.
 
-### Base Network Structure
-The analysis is built around a base grid topology with two main load buses. This fundamental structure serves as the foundation for all scenario analyses:
+This project tackles a critical challenge at the intersection of energy systems engineering and investment strategy:
+How can we design and operate future power systems that are both technically sound and economically viable?
 
-<img src="figures/base_network_topography.png" width="500"/>
+The model I developed answers this by combining:
+	•	Hourly power flow optimization to simulate grid operations using Linear Programming (LP).
+	•	Financial evaluation of renewable and storage assets using Net Present Value (NPV) and Annuities.
 
-*The base network defines the core infrastructure upon which different generation scenarios are evaluated.*
+It’s a decision-support tool built for evaluating energy investment scenarios—whether for national infrastructure, regional grids, or local microgrids.
 
-### Scenario Analysis
-Each scenario represents a unique combination of:
-- Generation asset placement at specific buses
-- Storage unit allocation
-- Load scaling factors
-- Seasonal variations (winter, summer, autumn/spring)
+⸻
 
-This modular approach allows us to evaluate various investment strategies while maintaining the core network constraints.
+## What the Model Can Do
 
-## Results
+At a glance:
+	•	Simulates realistic grid behavior hour-by-hour.
+	•	Optimizes generation and storage dispatch to minimize cost.
+	•	Compares long-term economic outcomes across different technology mixes.
+	•	Outputs clear visual and analytical reports, with optional AI-powered commentary.
 
-### Global Analysis
-- [Global Comparison Report](data/results/global_comparison_report.md)
+This allows users to explore “what-if” strategies like:
+	•	Adding batteries to stabilize solar-heavy grids.
+	•	Testing nuclear versus gas baseload performance.
+	•	Scaling renewables based on demand forecasts.
 
-
-### Individual Scenario Reports
-- [scenario_1](data/results/scenario_1/scenario_1_analysis.md)
-- [scenario_2](data/results/scenario_2/scenario_2_analysis.md)
-- [scenario_3](data/results/scenario_3/scenario_3_analysis.md)
-- [scenario_4](data/results/scenario_4/scenario_4_analysis.md)
-- [scenario_5](data/results/scenario_5/scenario_5_analysis.md)
-- [scenario_6](data/results/scenario_6/scenario_6_analysis.md)
-- [scenario_7](data/results/scenario_7/scenario_7_analysis.md)
-- [scenario_8](data/results/scenario_8/scenario_8_analysis.md)
-- [scenario_9](data/results/scenario_9/scenario_9_analysis.md)
-- [scenario_10](data/results/scenario_10/scenario_10_analysis.md)
-${scenario_links}
-
-## Project Structure
-```
-├── data/
-│   ├── working/          # Input data files
-│   └── results/          # Generated results and analysis
-├── scripts/
-│   ├── core/            # Core processing modules
-│   ├── visualization/   # Plotting and visualization
-│   └── utils/          # Helper utilities
-└── figures/             # Generated figures and diagrams
-```
+⸻
 
 ## Key Features
-- DCOPF analysis for multiple scenarios
-- Seasonal analysis (winter, summer, autumn/spring)
-- Generation vs demand visualization
-- AI-powered scenario critique
-- Economic and technical feasibility assessment
-- Modular scenario creation around base network topology
-- Investment optimization for different time horizons
+	1.	DC Optimal Power Flow (DCOPF):
+Uses LP to compute the lowest-cost electricity dispatch, respecting:
+	•	Generator limits
+	•	Line capacities
+	•	Storage constraints
+	2.	Scenario-Based Analysis:
+Modular setup enables batch comparison of different generation/storage portfolios, load shapes, and locations.
+	3.	Integrated Techno-Economic Metrics:
+Computes:
+	•	NPV over 10, 20, and 30 years
+	•	Annualized cost (annuity)
+	•	CAPEX, OPEX breakdowns
+	4.	Renewables & Storage Modeling:
+Captures solar/wind variability, round-trip efficiency, and battery behavior over time.
+	5.	Automated Reporting & Visualization:
+	•	Markdown reports for each scenario
+	•	Comparative charts for dispatch, generation mix, and financials
+	•	Optional AI insights on performance trade-offs
 
-## Running the Analysis
-1. Ensure all dependencies are installed:
-```bash
-pip install -r requirements.txt
-```
+⸻
 
-2. Set up your OpenAI API key in `.env.local`:
-```
-OPENAPI_KEY=your_api_key_here
-```
+## How It Works
 
-3. Run the main analysis:
-```bash
-python scripts/main.py
-```
+1. Configure Input Data
+	•	Grid topology: branch.csv, bus.csv (MATPOWER-style)
+	•	Generators/load profiles: master_gen.csv, master_load.csv
+	•	Scenario parameters: scenarios_parameters.csv
 
-## Visualization Examples
-Each scenario analysis includes:
-- Generation vs Demand plots for each season
-- Generation mix analysis
-- Capacity factor comparisons
-- Economic metrics
-- AI-generated critiques
-- Network topology visualizations
+2. Run Optimization
+	•	Solver: PuLP with CBC backend
+	•	Script: dcopf.py
 
-## Contributing
-Feel free to open issues or submit pull requests with improvements.
+3. Perform Investment Analysis
+	•	Script: create_master_invest.py
+	•	Inputs: CAPEX, OPEX, lifetime, discount rate
 
-## License
-[MIT License](LICENSE)
+4. Generate Outputs
+	•	Reports: scenario-wise .md reports
+	•	Plots: seasonal generation, cost breakdowns
+	•	(Optional) Run scenario_critic.py for AI-driven summaries
+
+⸻
+
+## Example Use Cases
+
+### Individual Scenario:
+	•	Dispatch & generation visualizations
+	•	Economic evaluation of wind + solar + nuclear + storage
+	•	Example:
+Scenario 5 analysis
+
+### Multi-Scenario Comparison:
+	•	Sorts best-performing tech mixes by annuity
+	•	Visual trade-offs across strategies
+	•	Explore:
+Global comparison report
+
+⸻
+
+## How to Run the Model
+	1.	Clone the repo:
+    ```bash
+    git clone https://github.com/vierui/vt1-energy-investment-model.git
+    cd energy-investment-model
+    ```
+
+	2.	Install dependencies :
+    ```bash
+    poetry install
+    ```
+
+	3.	Prepare your data:
+    Ensure input .csv files are in data/working/
+    Configure your scenarios in scenarios_parameters.csv
+	4.	Run the main script:
+    ```bash
+    poetry run python main.py
+    ```
+
+	5.	Explore outputs:
+    Results are saved in data/results/ and report/
+
+⸻
+
+🧩 Customization & Extension
+
+Designed as a flexible framework for experimentation:
+	•	Scale to any grid size (9-bus test to national-level topologies)
+	•	Add new generation/storage technologies by editing master_gen.csv
+	•	Adapt to future pricing models, policies, or climate scenarios
+
+⸻
+
+🤝 Contributions
+
+Contributions are welcome!
+Fork → Branch → Commit → PR
+
+⸻
+
+📜 License
+
+MIT License – see LICENSE
+
+⸻

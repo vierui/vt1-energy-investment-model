@@ -18,3 +18,18 @@ report/*.toc
 __pycache__/
 *.py[cod]
 *$py.class
+
+# VS Code
+.vscode/
+
+# Scenario analysis PDF
+results/scenario_5_analysis.pdf
+
+# Appendix folder
+appendix/
+
+# Figures folder
+figures/
+
+# Processed data
+data/processed/
