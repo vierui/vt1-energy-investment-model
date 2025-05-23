@@ -11,7 +11,6 @@ The model I developed answers this by combining:
 
 It’s a decision-support tool built for evaluating energy investment scenarios—whether for national infrastructure, regional grids, or local microgrids.
 
-
 ## What the Model Can Do
 **At a glance:**
 - Simulates realistic grid behavior hour-by-hour.
@@ -110,9 +109,9 @@ Results are saved in `data/results/`
 
 ## Customization & Extension
 Designed as a flexible framework for experimentation:
-	•	Scale to any grid size (9-bus test to national-level topologies)
-	•	Add new generation/storage technologies by editing master_gen.csv
-	•	Adapt to future pricing models, policies, or climate scenarios
+- Scale to any grid size (9-bus test to national-level topologies)
+- Add new generation/storage technologies by editing master_gen.csv
+- Adapt to future pricing models, policies, or climate scenarios
 
 ##  License
 MIT License – see LICENSE
