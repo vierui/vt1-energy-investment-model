@@ -1,7 +1,6 @@
 
-# Energy Investment Optimization Model
+# Platform for Investment Analysis of Energy Assets
 
-## Overview
 This project tackles a critical challenge at the intersection of **energy systems engineering** and **investment strategy**:  
 **How can we design and operate future power systems that are both technically sound and economically viable?**
 
@@ -12,7 +11,7 @@ The model I developed answers this by combining:
 It’s a decision-support tool built for evaluating energy investment scenarios—whether for national infrastructure, regional grids, or local microgrids.
 
 ## What the Model Can Do
-**At a glance:**
+#### **At a glance:**
 - Simulates realistic grid behavior hour-by-hour.
 - Optimizes generation and storage dispatch to minimize cost.
 - Compares long-term economic outcomes across different technology mixes.
@@ -25,57 +24,57 @@ This allows users to explore “what-if” strategies like:
 
 
 ## Key Features
-1. **DC Optimal Power Flow (DCOPF):**  
+#### 1. **DC Optimal Power Flow (DCOPF):**  
    Uses LP to compute the lowest-cost electricity dispatch, respecting:
    - Generator limits  
    - Line capacities  
    - Storage constraints
 
-2. **Scenario-Based Analysis:**  
+#### 2. **Scenario-Based Analysis:**  
    Modular setup enables batch comparison of different generation/storage portfolios, load shapes, and locations.
 
-3. **Integrated Techno-Economic Metrics:**  
+#### 3. **Integrated Techno-Economic Metrics:**  
    Computes:
    - NPV over 10, 20, and 30 years  
    - Annualized cost (annuity)  
    - CAPEX, OPEX breakdowns
 
-4. **Renewables & Storage Modeling:**  
+#### 4. **Renewables & Storage Modeling:**  
    Captures solar/wind variability, round-trip efficiency, and battery behavior over time.
 
-5. **Automated Reporting & Visualization:**  
+#### 5. **Automated Reporting & Visualization:**  
    - Markdown reports for each scenario  
    - Comparative charts for dispatch, generation mix, and financials  
    - Optional AI insights on performance trade-offs
 
 
 ## How It Works
-### 1. Configure Input Data
+#### 1. Configure Input Data
 - **Grid topology:** `branch.csv`, `bus.csv` (MATPOWER-style)
 - **Generators/load profiles:** `master_gen.csv`, `master_load.csv`
 - **Scenario parameters:** `scenarios_parameters.csv`
 
-### 2. Run Optimization
+#### 2. Run Optimization
 - Solver: `PuLP` with CBC backend  
 - Script: `dcopf.py`
 
-### 3. Perform Investment Analysis
+#### 3. Perform Investment Analysis
 - Script: `create_master_invest.py`  
 - Inputs: CAPEX, OPEX, lifetime, discount rate
 
-### 4. Generate Outputs
+#### 4. Generate Outputs
 - Reports: scenario-wise `.md` reports  
 - Plots: seasonal generation, cost breakdowns  
 - (Optional) Run `scenario_critic.py` for AI-driven summaries
 
 
 ## Example Use Cases
-### Individual Scenario:  
+#### Individual Scenario:  
 - Dispatch & generation visualizations  
 - Economic evaluation of wind + solar + nuclear + storage  
 - *Example:*  [Scenario 5 analysis](data/results/scenario_5/scenario_5_analysis.md)
 
-### Multi-Scenario Comparison:  
+#### Multi-Scenario Comparison:  
 - Sorts best-performing tech mixes by annuity  
 - Visual trade-offs across strategies  
 - *Explore:*  [Global comparison report](data/results/global_comparison_report.md)
